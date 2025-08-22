@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -20,11 +23,11 @@ android {
 
     signingConfigs {
         create("release") {
-            val localProperties = java.util.Properties()
+            val localProperties = Properties()
             val localPropertiesFile = rootProject.file("local.properties")
 
             if (localPropertiesFile.exists()) {
-                localProperties.load(java.io.FileInputStream(localPropertiesFile))
+                localProperties.load(FileInputStream(localPropertiesFile))
 
                 val storeFilePath = localProperties.getProperty("STORE_FILE")
                 val storePasswordValue = localProperties.getProperty("STORE_PASSWORD")
